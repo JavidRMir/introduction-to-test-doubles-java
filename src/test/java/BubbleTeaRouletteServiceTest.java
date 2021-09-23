@@ -1,6 +1,7 @@
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaRouletteService;
 import com.techreturners.bubbleteaordersystem.model.BubbleTeaTypeEnum;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import testhelper.RandomStub;
 
@@ -20,7 +21,7 @@ public class BubbleTeaRouletteServiceTest {
         var expectedResult = BubbleTeaTypeEnum.JasmineMilkTea;
 
         //Assert
-        assertEquals(expectedResult, actualResult);
+        Assertions.assertEquals(expectedResult, actualResult);
 
     }
 }

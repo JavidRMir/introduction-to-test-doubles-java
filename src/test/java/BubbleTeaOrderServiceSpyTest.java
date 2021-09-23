@@ -2,6 +2,7 @@ import com.techreturners.bubbleteaordersystem.model.*;
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaMessenger;
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaOrderService;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import testhelper.DummySimpleLogger;
@@ -44,10 +45,10 @@ public class BubbleTeaOrderServiceSpyTest {
         BubbleTeaOrderRequest result = bubbleTeaOrderService.createOrderRequest(bubbleTeaRequest);
 
         //Assert
-        assertEquals(expectedResult.getName(), result.getName());
-        assertEquals(expectedResult.getAddress(), result.getAddress());
-        assertEquals(expectedResult.getDebitCardDigits(), result.getDebitCardDigits());
-        assertEquals(expectedResult.getBubbleTeaType(), result.getBubbleTeaType());
+        Assertions.assertEquals(expectedResult.getName(), result.getName());
+        Assertions.assertEquals(expectedResult.getAddress(), result.getAddress());
+        Assertions.assertEquals(expectedResult.getDebitCardDigits(), result.getDebitCardDigits());
+        Assertions.assertEquals(expectedResult.getBubbleTeaType(), result.getBubbleTeaType());
 
         //Check the spied messenger was called with BubbleTeaOrderRequest result
         verify(spiedMessenger).sendBubbleTeaOrderRequestEmail(result);

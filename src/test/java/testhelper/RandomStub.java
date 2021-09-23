@@ -16,4 +16,5 @@ public class RandomStub extends Random {
         return this.value;
     }
 
+
 }
