@@ -5,7 +5,14 @@ import com.techreturners.bubbleteaordersystem.service.BubbleTeaOrderService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+import org.mockito.Spy;
 import testhelper.DummySimpleLogger;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -54,5 +61,29 @@ public class BubbleTeaOrderServiceSpyTest {
         verify(spiedMessenger).sendBubbleTeaOrderRequestEmail(result);
         verify(spiedMessenger, times(1)).sendBubbleTeaOrderRequestEmail(result);
     }
+
+
+    @Test
+    public void checkSpyCallFrequencyIsCorrect() {
+
+        Map<String, BubbleTeaRequest> spyMap= spy(new HashMap<>());
+
+        BubbleTea bubbleTeaOne = new BubbleTea(BubbleTeaTypeEnum.MatchaMilkTea, 6.78);
+        BubbleTeaRequest bubbleTeaRequestOne = new BubbleTeaRequest(paymentDetails, bubbleTeaOne);
+
+        BubbleTea bubbleTeaTwo = new BubbleTea(BubbleTeaTypeEnum.OolongMilkTea, 5.69);
+        BubbleTeaRequest bubbleTeaRequestTwo = new BubbleTeaRequest(paymentDetails, bubbleTeaTwo);
+
+        spyMap.put("RequestOne", bubbleTeaRequestOne);
+        spyMap.put("RequestTwo", bubbleTeaRequestTwo);
+
+        verify(spyMap).put("RequestOne", bubbleTeaRequestOne);
+        verify(spyMap).put("RequestTwo", bubbleTeaRequestTwo);
+
+        Assertions.assertEquals(2, spyMap.size());
+
+
+    }
+
 
 }
