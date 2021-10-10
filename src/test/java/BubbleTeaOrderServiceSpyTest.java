@@ -1,20 +1,14 @@
 import com.techreturners.bubbleteaordersystem.model.*;
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaMessenger;
 import com.techreturners.bubbleteaordersystem.service.BubbleTeaOrderService;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.mockito.Spy;
 import testhelper.DummySimpleLogger;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class BubbleTeaOrderServiceSpyTest {
@@ -66,7 +60,7 @@ public class BubbleTeaOrderServiceSpyTest {
     @Test
     public void checkSpyCallFrequencyIsCorrect() {
 
-        Map<String, BubbleTeaRequest> spyMap= spy(new HashMap<>());
+        Map<String, BubbleTeaRequest> spyMap = spy(new HashMap<>());
 
         BubbleTea bubbleTeaOne = new BubbleTea(BubbleTeaTypeEnum.MatchaMilkTea, 6.78);
         BubbleTeaRequest bubbleTeaRequestOne = new BubbleTeaRequest(paymentDetails, bubbleTeaOne);
