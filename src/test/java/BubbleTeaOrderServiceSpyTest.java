@@ -58,9 +58,9 @@ public class BubbleTeaOrderServiceSpyTest {
 
 
     @Test
-    public void checkSpyCallFrequencyIsCorrect() {
+    public void spyMapToCheckEachInteractionWithCreateBubbleTeaOrderRequest() {
 
-        Map<String, BubbleTeaRequest> spyMap = spy(new HashMap<>());
+        Map<String, BubbleTeaOrderRequest> spyMap = spy(new HashMap<>());
 
         BubbleTea bubbleTeaOne = new BubbleTea(BubbleTeaTypeEnum.MatchaMilkTea, 6.78);
         BubbleTeaRequest bubbleTeaRequestOne = new BubbleTeaRequest(paymentDetails, bubbleTeaOne);
@@ -68,13 +68,22 @@ public class BubbleTeaOrderServiceSpyTest {
         BubbleTea bubbleTeaTwo = new BubbleTea(BubbleTeaTypeEnum.OolongMilkTea, 5.69);
         BubbleTeaRequest bubbleTeaRequestTwo = new BubbleTeaRequest(paymentDetails, bubbleTeaTwo);
 
-        spyMap.put("RequestOne", bubbleTeaRequestOne);
-        spyMap.put("RequestTwo", bubbleTeaRequestTwo);
+        BubbleTeaOrderRequest result1 = bubbleTeaOrderService.createOrderRequest(bubbleTeaRequestOne);
+        BubbleTeaOrderRequest result2 = bubbleTeaOrderService.createOrderRequest(bubbleTeaRequestTwo);
 
-        verify(spyMap).put("RequestOne", bubbleTeaRequestOne);
-        verify(spyMap).put("RequestTwo", bubbleTeaRequestTwo);
+        spyMap.put("RequestOne", result1);
+        spyMap.put("RequestTwo", result2);
+
+        verify(spyMap).put("RequestOne", result1);
+        verify(spyMap).put("RequestTwo", result2);
 
         Assertions.assertEquals(2, spyMap.size());
+
+        Assertions.assertEquals(BubbleTeaTypeEnum.MatchaMilkTea,
+                spyMap.get("RequestOne").getBubbleTeaType());
+
+        Assertions.assertEquals(BubbleTeaTypeEnum.OolongMilkTea,
+                spyMap.get("RequestTwo").getBubbleTeaType());
 
 
     }
